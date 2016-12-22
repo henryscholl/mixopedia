@@ -1,12 +1,28 @@
 <% include partials/header %>
 
-<h1>Cocktails</h1>
-
-<% cocktails.forEach(function(cocktail) { %>
-
-<li><%= cocktail.name %></li>
-<img src="<%= cocktail.image %>">
-
-<% }) %>
+  <div class="container">
+      
+    <header class="jumbotron">
+        <h1>Cocktails</h1>
+        <p>Discover and share cocktail recipes to up your bartending game</p>
+        <p>
+            <a class="btn btn-primary btn-large" href="/cocktails/new">Add New Cocktail</a>
+        </p>
+    </header>
+    
+    <div class="row" style="display:flex; flex-wrap: wrap;">
+        
+        <% cocktails.forEach(function(cocktail) { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= cocktail.image %>">
+                    <div class="caption">
+                        <h4><%= cocktail.name %></h4>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+  </div>
 
 <% include partials/footer %>
