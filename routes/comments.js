@@ -1,11 +1,12 @@
 var express = require("express"),
     router = express.Router({mergeParams: true}),
     Cocktail = require("../models/cocktail"),
-    Comment = require("../models/comment");
+    Comment = require("../models/comment"),
+    middleware = require("../middleware");
     
     
 // NEW
-router.get("/new", function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
     Cocktail.findById(req.params.id, function(err, cocktail) {
         if(err) {
             console.log(err);
@@ -16,7 +17,7 @@ router.get("/new", function(req, res) {
 });
 
 // CREATE
-router.post("/", function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
     Cocktail.findById(req.params.id, function(err, cocktail) {
         if(err) {
             console.log(err);
