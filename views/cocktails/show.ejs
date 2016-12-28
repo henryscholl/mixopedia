@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h1><%= cocktail.name %></h1>
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= cocktail.image %>">
+                <div class="caption-full">
+                    <p><b>Ingredients:</b></p>
+                    <p><%= cocktail.ingredients %></p>
+                    <p><b>Recipe:</b></p>
+                    <p><%= cocktail.recipe %></p>
+                </div>
+            </div>
+            <div class="well">
+                <h4 id="comment-heading">Comments for <%= cocktail.name %></h4>
+                <div class="text-right">
+                    <a class="btn btn-sm btn-success" href="/cocktails/<%= cocktail._id %>/comments/new">Add Comment</a>
+                </div>
+                <hr>
+                <% cocktail.comments.forEach(function(comment) { %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+                
+            
+         </div> 
+    </div>
+</div>
+
+<% include ../partials/footer %>
+

@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
   <div class="container">
       
@@ -15,7 +15,9 @@
         <% cocktails.forEach(function(cocktail) { %>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                    <img src="<%= cocktail.image %>">
+                    <a href="/cocktails/<%= cocktail._id %>">
+                        <img src="<%= cocktail.image %>">
+                    </a>
                     <div class="caption">
                         <h4><%= cocktail.name %></h4>
                     </div>
@@ -25,4 +27,4 @@
     </div>
   </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
