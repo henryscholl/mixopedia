@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 mongoose.connect("mongodb://localhost/cocktail_app");
-seedDB();   
+// seedDB();   // seed the database
 
 // Passport config
 app.use(require("express-session")({

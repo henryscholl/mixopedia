@@ -1,6 +1,7 @@
 var express     = require("express"),
     Cocktail    = require("../models/cocktail"),
-    router      = express.Router();
+    router      = express.Router(),
+    middleware  = require("../middleware");
     
 // INDEX
 router.get("/", function(req, res) {
@@ -14,16 +15,22 @@ router.get("/", function(req, res) {
 });
 
 // NEW
-router.get("/new", function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
     res.render("cocktails/new");
 });
 
 // CREATE
-router.post("/", function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
    Cocktail.create(req.body.cocktail, function(err, cocktail) {
        if(err) { 
             console.log(err); 
         } else {
+            cocktail.author = author;
+            cocktail.save();
             res.redirect("/cocktails");
         }
    });
