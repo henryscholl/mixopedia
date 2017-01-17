@@ -29,28 +29,28 @@ function seedDB() {
             console.log(err);
         } 
         console.log("removed cocktails");
-        data.forEach(function(seed) {
-            Cocktail.create(seed, function(err, cocktail) {
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log("Added a cocktail");
-                    Comment.create(
-                        {
-                            text: "Great drink! I used more bitters.",
-                            author: "SomeHipster"
-                        }, function(err, comment) {
-                            if(err) {
-                                console.log(err);
-                            } else {
-                                cocktail.comments.push(comment);
-                                cocktail.save();
-                                console.log("Created comment");
-                            }
-                        });
-                }
-            });
-        });
+        // data.forEach(function(seed) {
+        //     Cocktail.create(seed, function(err, cocktail) {
+        //         if(err) {
+        //             console.log(err);
+        //         } else {
+        //             console.log("Added a cocktail");
+        //             Comment.create(
+        //                 {
+        //                     text: "Great drink! I used more bitters.",
+        //                     author: "SomeHipster"
+        //                 }, function(err, comment) {
+        //                     if(err) {
+        //                         console.log(err);
+        //                     } else {
+        //                         cocktail.comments.push(comment);
+        //                         cocktail.save();
+        //                         console.log("Created comment");
+        //                     }
+        //                 });
+        //         }
+        //     });
+        // });
     });
 }
 

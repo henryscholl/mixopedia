@@ -8,6 +8,12 @@
                 <img class="img-responsive" src="<%= cocktail.image %>">
                 <div class="caption-full">
                     <p><em>Submitted by <%= cocktail.author.username %></em></p>
+                    <% if(currentUser && cocktail.author.id.equals(currentUser._id)) { %>
+                        <a class="btn btn-xs btn-warning" href="/cocktails/<%= cocktail._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/cocktails/<%= cocktail._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
                     <p><b>Ingredients:</b></p>
                     <p><%= cocktail.ingredients %></p>
                     <p><b>Recipe:</b></p>
@@ -28,12 +34,16 @@
                             <p>
                                 <%= comment.text %>
                             </p>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                <a class="btn btn-xs btn-warning" href="/cocktails/<%= cocktail._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                                <form id="delete-form" action="/cocktails/<%= cocktail._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                     <button class="btn btn-xs btn-danger">Delete</a>
+                                </form>
+                            <% } %>    
                         </div>
                     </div>
                 <% }) %>
             </div>
-                
-            
          </div> 
     </div>
 </div>

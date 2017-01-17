@@ -31,6 +31,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         } else {
             cocktail.author = author;
             cocktail.save();
+            req.flash("success", "Your cocktail has been added!");
             res.redirect("/cocktails");
         }
    });
@@ -45,6 +46,40 @@ router.get("/:id", function(req, res) {
             res.render("cocktails/show", {cocktail: cocktail});
         }
    }); 
+});
+
+// EDIT
+
+router.get("/:id/edit", middleware.checkCocktailOwnership, function(req, res) {
+    Cocktail.findById((req.params.id), function(err, cocktail) {
+        res.render("cocktails/edit", {cocktail: cocktail});
+    });
+});
+
+// UPDATE
+
+router.put("/:id", middleware.checkCocktailOwnership, function(req, res) {
+    Cocktail.findByIdAndUpdate(req.params.id, req.body.cocktail, function(err, updatedCocktail) {
+        if(err) {
+            res.redirect("/cocktails");
+        } else {
+            req.flash("success", "Your cocktail was updated!");
+            res.redirect("/cocktails/" + req.params.id);
+        }
+    });
+});
+
+// DESTROY
+
+router.delete("/:id", middleware.checkCocktailOwnership, function(req, res) {
+   Cocktail.findByIdAndRemove(req.params.id, function(err) {
+       if(err) {
+           res.redirect("/cocktails");
+       } else {
+           req.flash("success", "Your cocktail was removed.");
+           res.redirect("/cocktails");
+       }
+   });
 });
 
 module.exports = router;

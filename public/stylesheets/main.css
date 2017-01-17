@@ -5,3 +5,7 @@
 #comment-heading {
     float: left;
 }
+
+#delete-form {
+    display: inline;
+}
