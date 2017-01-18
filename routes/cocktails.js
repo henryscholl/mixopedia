@@ -31,6 +31,8 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         } else {
             cocktail.author = author;
             cocktail.save();
+            req.user.cocktails.push(cocktail);
+            req.user.save();
             req.flash("success", "Your cocktail has been added!");
             res.redirect("/cocktails");
         }

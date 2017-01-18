@@ -7,7 +7,7 @@
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= cocktail.image %>">
                 <div class="caption-full">
-                    <p><em>Submitted by <%= cocktail.author.username %></em></p>
+                    <p><em>Submitted by <a href="/users/<%= cocktail.author.id %>"><%= cocktail.author.username %></a></em></p>
                     <% if(currentUser && cocktail.author.id.equals(currentUser._id)) { %>
                         <a class="btn btn-xs btn-warning" href="/cocktails/<%= cocktail._id %>/edit">Edit</a>
                         <form id="delete-form" action="/cocktails/<%= cocktail._id %>?_method=DELETE" method="POST">

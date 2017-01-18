@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Cocktail = require("./models/cocktail");
 var Comment  = require("./models/comment");
+var User  = require("./models/user");
 
 var data = [
     {
@@ -29,6 +30,12 @@ function seedDB() {
             console.log(err);
         } 
         console.log("removed cocktails");
+    User.remove({}, function(err) {
+        if(err) {
+            console.log(err);
+        } 
+        console.log("removed users");
+        });    
         // data.forEach(function(seed) {
         //     Cocktail.create(seed, function(err, cocktail) {
         //         if(err) {

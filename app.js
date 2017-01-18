@@ -10,6 +10,7 @@ var express         = require("express"),
     indexRoutes     = require("./routes/index"),
     cocktailRoutes  = require("./routes/cocktails"),
     commentRoutes   = require("./routes/comments"),
+    userRoutes      = require("./routes/users"),
     methodOverride  = require("method-override"),
     flash           = require("connect-flash"),
     seedDB          = require("./seeds");
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 app.use("/", indexRoutes);
 app.use("/cocktails", cocktailRoutes);
 app.use("/cocktails/:id/comments", commentRoutes);
+app.use("/users", userRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function() {
