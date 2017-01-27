@@ -1,5 +1,6 @@
 var Cocktail = require("../models/cocktail"),
-    Comment  = require("../models/comment");
+    Comment  = require("../models/comment"),
+    User     = require("../models/user");
 
 var middlewareObj = {};
 
@@ -40,6 +41,27 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
                 }
             }
         })    
+    } else {
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+    }
+}
+
+middlewareObj.checkUserPermission = function(req, res, next) {
+    if(req.isAuthenticated()) {
+         User.findById(req.params.id, function(err, user) {
+        if(err) {
+            res.redirect("back");
+        } else {
+            // is logged in user same as user page owner?
+            if(user._id.equals(req.user._id)) {
+                next();
+            } else {
+                req.flash("error", "You don't have permission to do that");
+                res.redirect("back");
+            }
+        }
+    });
     } else {
         req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
