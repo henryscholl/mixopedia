@@ -10,6 +10,14 @@
     display: inline;
 }
 
+#search-form {
+    padding-bottom: 25px;
+}
+
 #profile {
     width: 30%;
+}
+
+#search-input {
+    width: 260px;
 }

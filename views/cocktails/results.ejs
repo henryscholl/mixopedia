@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+    <h2>Search results for "<%= query %>"</h2>
+    
+    <% if (cocktails.length < 1) { %>
+        <li>Sorry, no results found.</li>
+    <% } %>    
+    
+    <div class="row" style="display:flex; flex-wrap: wrap;">
+        
+        <% cocktails.forEach(function(cocktail) { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <a href="/cocktails/<%= cocktail._id %>">
+                        <img src="<%= cocktail.image %>">
+                    </a>
+                    <div class="caption">
+                        <h4><%= cocktail.name %></h4>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
+
+<% include ../partials/footer %>

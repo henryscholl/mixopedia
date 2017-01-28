@@ -84,4 +84,17 @@ router.delete("/:id", middleware.checkCocktailOwnership, function(req, res) {
    });
 });
 
+// SEARCH
+
+router.post("/search", function(req, res) {
+    var results = new RegExp(req.body.query, "i")
+    Cocktail.find({$or: [
+        {ingredients: results},
+        {name: results}
+        ]}, 
+        function(err, cocktails) {
+        res.render("cocktails/results", {cocktails: cocktails, query: req.body.query});
+    });    
+});
+
 module.exports = router;
