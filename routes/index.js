@@ -1,11 +1,18 @@
 var express = require("express"),
     router  = express.Router(),
     User    = require("../models/user"),
+    Cocktail    = require("../models/cocktail"),
     passport = require("passport");
 
 //INDEX
 router.get("/", function(req, res) {
-   res.render("landing"); 
+   Cocktail.find({}, function(err, cocktails) {
+        if(err) { 
+            console.log(err) 
+        } else {
+            res.render("cocktails/index", {cocktails: cocktails}); 
+        }
+    });
 });
 
 //Auth routes
@@ -24,7 +31,7 @@ router.post("/register", function(req, res) {
         }
         passport.authenticate("local")(req, res, function() {
             req.flash("success", "Welcome, " + user.username + "!");
-            res.redirect("/cocktails");
+            res.redirect("/");
         });
     });
 });
@@ -40,7 +47,7 @@ router.post("/login", passport.authenticate("local",
         failureRedirect: "/login",
         failureFlash: true
     }), function(req, res) {
-            var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/cocktails";
+            var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/";
             delete req.session.redirectTo;
             req.flash("success", "Welcome back, " + req.user.username + "!");
             res.redirect(redirectTo);
@@ -50,7 +57,7 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout", function(req, res) {
    req.logout();
    req.flash("success", "You are now logged out.");
-   res.redirect("/cocktails");
+   res.redirect("/");
 });
 
 module.exports = router;

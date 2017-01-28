@@ -9,7 +9,7 @@ router.get("/", function(req, res) {
         if(err) { 
             console.log(err) 
         } else {
-            res.render("cocktails/index", {cocktails: cocktails}); 
+            res.render("cocktails/browse", {cocktails: cocktails}); 
         }
     });
 });
@@ -34,7 +34,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
             req.user.cocktails.push(cocktail);
             req.user.save();
             req.flash("success", "Your cocktail has been added!");
-            res.redirect("/cocktails");
+            res.redirect("/cocktails/" + cocktail.id);
         }
    });
 });
@@ -79,7 +79,7 @@ router.delete("/:id", middleware.checkCocktailOwnership, function(req, res) {
            res.redirect("/cocktails");
        } else {
            req.flash("success", "Your cocktail was removed.");
-           res.redirect("/cocktails");
+           res.redirect("/");
        }
    });
 });
@@ -97,7 +97,7 @@ router.post("/search", function(req, res) {
         res.render("cocktails/results", {cocktails: cocktails, query: req.body.query});
     });
     } else {
-        res.redirect("/cocktails");
+        res.redirect("/");
     }
 });
 
