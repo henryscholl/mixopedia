@@ -37,11 +37,13 @@ router.get("/login", function(req, res) {
 // Log user in
 router.post("/login", passport.authenticate("local", 
     {
-        successRedirect: "/cocktails",
         failureRedirect: "/login",
-        failureFlash: true,
-        successFlash: "Welcome back!"
+        failureFlash: true
     }), function(req, res) {
+            var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/cocktails";
+            delete req.session.redirectTo;
+            req.flash("success", "Welcome back, " + req.user.username + "!");
+            res.redirect(redirectTo);
 });
 
 // Logout route

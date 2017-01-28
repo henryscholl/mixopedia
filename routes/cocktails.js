@@ -87,6 +87,7 @@ router.delete("/:id", middleware.checkCocktailOwnership, function(req, res) {
 // SEARCH
 
 router.post("/search", function(req, res) {
+    if (req.body.query) {
     var results = new RegExp(req.body.query, "i")
     Cocktail.find({$or: [
         {ingredients: results},
@@ -94,7 +95,10 @@ router.post("/search", function(req, res) {
         ]}, 
         function(err, cocktails) {
         res.render("cocktails/results", {cocktails: cocktails, query: req.body.query});
-    });    
+    });
+    } else {
+        res.redirect("/cocktails");
+    }
 });
 
 module.exports = router;

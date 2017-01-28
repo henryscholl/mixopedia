@@ -2,11 +2,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <h1><%= cocktail.name %></h1>
+        </div>
+        <div class="col-md-5">
             <div class="thumbnail">
-                <img class="img-responsive" src="<%= cocktail.image %>">
-                <div class="caption-full">
+                <img  class="img-responsive" src="<%= cocktail.image %>">
+            </div>
+        </div>
+        <div class="col-md-4">
+                <div>
                     <p><em>Submitted by <a href="/users/<%= cocktail.author.id %>"><%= cocktail.author.username %></a></em></p>
                     <% if(currentUser && cocktail.author.id.equals(currentUser._id)) { %>
                         <a class="btn btn-xs btn-warning" href="/cocktails/<%= cocktail._id %>/edit">Edit</a>
@@ -19,7 +24,8 @@
                     <p><b>Recipe:</b></p>
                     <p><%= cocktail.recipe %></p>
                 </div>
-            </div>
+        </div>        
+        <div class="col-md-9">        
             <div class="well">
                 <h4 id="comment-heading">Comments for <%= cocktail.name %></h4>
                 <div class="text-right">

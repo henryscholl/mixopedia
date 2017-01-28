@@ -72,6 +72,8 @@ middlewareObj.isLoggedIn = function(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
     }
+    // set temporary forwarding path before redirecting to login page
+    req.session.redirectTo = req.originalUrl;
     req.flash("error", "Please log in first!");
     res.redirect("/login");
 }

@@ -5,8 +5,12 @@
     <h2>Search results for "<%= query %>"</h2>
     
     <% if (cocktails.length < 1) { %>
-        <li>Sorry, no results found.</li>
-    <% } %>    
+        <p>Sorry, no results found.</p>
+    <% }  else if (cocktails.length == 1) { %>
+        <p>1 result:</p>
+    <% }  else if (cocktails.length > 1) { %>
+         <p><%= cocktails.length %> results:</p>
+    <% } %>     
     
     <div class="row" style="display:flex; flex-wrap: wrap;">
         
@@ -23,6 +27,7 @@
             </div>
         <% }) %>
     </div>
+    <a href="/cocktails">Back</a>
 
 </div>
 
