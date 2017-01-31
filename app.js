@@ -13,22 +13,22 @@ var express         = require("express"),
     userRoutes      = require("./routes/users"),
     methodOverride  = require("method-override"),
     flash           = require("connect-flash"),
-    seedDB          = require("./seeds");
+    seedDB          = require("./seeds"),
+    expressConfig   = require("./secret");
     
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-mongoose.connect("mongodb://localhost/cocktail_app");
+
+var url = process.env.DATABASEURL || "mongodb://localhost/cocktail_app";
+mongoose.connect(url);
+
 app.use(methodOverride("_method"));
 app.use(flash());
 // seedDB();   // seed the database
 
 // Passport config
-app.use(require("express-session")({
-    secret: "Secret string that should not be public",
-    resave: false,
-    saveUninitialized: false
-}));
+app.use(require("express-session")(expressConfig));
 
 app.use(passport.initialize());
 app.use(passport.session());
