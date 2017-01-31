@@ -12,9 +12,7 @@ var express         = require("express"),
     commentRoutes   = require("./routes/comments"),
     userRoutes      = require("./routes/users"),
     methodOverride  = require("method-override"),
-    flash           = require("connect-flash"),
-    seedDB          = require("./seeds"),
-    expressConfig   = require("./secret");
+    flash           = require("connect-flash");
     
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -25,10 +23,13 @@ mongoose.connect(url);
 
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB();   // seed the database
 
 // Passport config
-app.use(require("express-session")(expressConfig));
+app.use(require("express-session")({
+        secret: process.env.SECRETCONFIG,
+        resave: false,
+        saveUninitialized: false
+    }));
 
 app.use(passport.initialize());
 app.use(passport.session());
