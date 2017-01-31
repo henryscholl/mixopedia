@@ -12,6 +12,11 @@
 
 #search-form {
     padding-bottom: 25px;
+    margin-right: 0px;
+}
+
+#new-button {
+    padding-bottom: 25px;
 }
 
 #profile {
@@ -19,5 +24,27 @@
 }
 
 #search-input {
-    width: 260px;
+    width: 100%;
+}
+
+#textarea {
+    resize: none;
+}
+
+#logo-text {
+    font-family: 'Patua One';
+    font-size: 60px;
+    text-shadow: 1.5px 1.5px 1.5px rgba(0,0,0,0.2);
+}
+
+#logo-glass {
+    font-size: .75em;
+}
+
+#nav-glass {
+    font-size: .8em;
+}
+
+#footer {
+    margin-bottom: 0px;
 }

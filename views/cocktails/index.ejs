@@ -2,21 +2,32 @@
 
   <div class="container">
       
-    <header class="jumbotron">
-        <h1><span class="glyphicon glyphicon-glass" aria-hidden="true"></span> Mixopedia</h1>
-        <p>Discover and share cocktail recipes to up your bartending game</p>
-        <p>
-            <a class="btn btn-primary btn-large" href="/cocktails/new">Add New Cocktail</a>
-        </p>
-    </header>
-    <form class="form-inline" id="search-form" action="/cocktails/search" method="POST">
-        <div class="form-group">
-            <input id="search-input" class="form-control" type="text" name="query" placeholder="Search for a drink or ingredient" required>
+    <div class="page-header">
+        <h1 id="logo-text"><span id="logo-glass" class="glyphicon glyphicon-glass" aria-hidden="true"></span> Mixopedia</h1>
+        <p class="lead">Discover and share cocktail recipes to up your bartending game</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="new-button" class="navbar-left">
+                <a class="btn btn-primary btn-block" href="/cocktails/new">Add New Cocktail</a>
+            </div>
+            <div class="navbar-left">&nbsp;</div>
+             <div class="navbar-left">
+                <a class="btn btn-default btn-block" href="/cocktails">Browse Cocktails</a>
+            </div>
         </div>
-        <div class="form-group">
-            <button class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form class="form-inline navbar-right" id="search-form" action="/cocktails/search" method="POST">
+                <div class="form-group">
+                    <input id="search-input" class="form-control" type="text" name="query" placeholder="Find a drink" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Search</button>
+                </div>
+            </form>
+        </div>   
+    </div>
     <div class="row" style="display:flex; flex-wrap: wrap;">
         
         <% cocktails.forEach(function(cocktail) { %>
@@ -31,7 +42,14 @@
                 </div>
             </div>
         <% }) %>
+        
     </div>
+    <nav aria-label="...">
+      <ul class="pager">
+        <li class="previous"><a href="/cocktails">See more</a></li>
+      </ul>
+    </nav>
+    
   </div>
 
 <% include ../partials/footer %>

@@ -6,7 +6,7 @@ var express = require("express"),
 
 //INDEX
 router.get("/", function(req, res) {
-   Cocktail.find({}, function(err, cocktails) {
+   Cocktail.find({}).limit(8).exec(function(err, cocktails) {
         if(err) { 
             console.log(err) 
         } else {
